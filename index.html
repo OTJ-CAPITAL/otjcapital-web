@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTJ Capital — AI-Native Quantitative Hedge Fund</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black: #000; --white: #fff; --gray: #111; --muted: #666; --border: #1a1a1a; --light: #888; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #fff; color: #000; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 900; font-size: 18px; letter-spacing: 4px; }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a { font-size: 13px; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { font-size: 13px; border: 1px solid var(--white); padding: 8px 20px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--white); color: var(--black); }
+
+    /* SECTIONS */
+    section { border-bottom: 1px solid var(--border); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 64px; }
+    #hero .container { padding-top: 60px; padding-bottom: 60px; }
+    .eyebrow { font-size: 12px; color: var(--muted); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 32px; }
+    h1 { font-size: clamp(56px, 11vw, 130px); font-weight: 900; line-height: 0.9; letter-spacing: -4px; }
+    .hero-sub { margin-top: 32px; max-width: 480px; font-size: 18px; color: var(--light); line-height: 1.7; }
+    .btn-row { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--white); color: var(--black); font-weight: 700; padding: 16px 32px; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
+    .btn-primary:hover { background: #e0e0e0; }
+    .btn-outline { border: 1px solid #333; color: var(--white); padding: 16px 32px; font-size: 13px; letter-spacing: 1px; transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: var(--white); }
+    .stats-row { margin-top: 80px; padding-top: 48px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .stat-val { font-size: 32px; font-weight: 900; }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    /* ABOUT */
+    #about .container { padding: 120px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .section-label { font-size: 11px; color: var(--muted); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 24px; }
+    h2 { font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; }
+    .body-text { color: var(--light); line-height: 1.8; margin-bottom: 20px; font-size: 15px; }
+    .body-text.highlight { color: var(--white); font-weight: 600; }
+
+    /* STRATEGIES */
+    #strategies .container { padding: 120px 24px; }
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 64px; }
+    .card { background: var(--black); padding: 40px; }
+    .card-tag { font-size: 11px; color: var(--muted); letter-spacing: 4px; text-transform: uppercase; }
+    .card-title { font-size: 20px; font-weight: 800; margin: 12px 0 16px; }
+    .card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* RISK */
+    #risk { background: #040404; }
+    #risk .container { padding: 120px 24px; }
+    .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 64px; }
+    .risk-card { background: #040404; padding: 40px; }
+    .risk-val { font-size: 36px; font-weight: 900; }
+    .risk-label { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+    /* MILESTONES */
+    #milestones .container { padding: 120px 24px; }
+    .milestone-list { margin-top: 64px; display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+    .milestone-row { display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; }
+    .milestone-row.active { background: var(--white); color: var(--black); }
+    .milestone-row:not(.active) { background: var(--black); }
+    .milestone-stage { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.5; }
+    .milestone-amount { font-size: 26px; font-weight: 900; margin-left: 24px; }
+    .milestone-left { display: flex; align-items: center; }
+    .milestone-date { font-size: 13px; }
+    .milestone-row:not(.active) .milestone-date { color: var(--muted); }
+    .milestone-row.active .milestone-date { font-weight: 700; }
+
+    /* FOOTER */
+    footer { padding: 60px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 32px; }
+    .footer-name { font-weight: 900; font-size: 17px; letter-spacing: 4px; }
+    .footer-sub { font-size: 13px; color: #444; margin-top: 4px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #444; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid #111; font-size: 11px; color: #333; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      #about .container { grid-template-columns: 1fr; gap: 40px; }
+      .card-grid, .risk-grid { grid-template-columns: 1fr; }
+      .milestone-row { padding: 20px 24px; }
+      .milestone-amount { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="logo">OTJ</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#milestones">Milestones</a>
+    </div>
+    <a href="mailto:invest@otjcapital.com" class="nav-cta">Invest</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <p class="eyebrow">Nairobi, Kenya · Est. 2026</p>
+    <h1>OTJ<br>CAPITAL</h1>
+    <p class="hero-sub">An AI-native quantitative hedge fund. We deploy systematic trading strategies across crypto markets — autonomously, 24/7.</p>
+    <div class="btn-row">
+      <a href="mailto:invest@otjcapital.com" class="btn-primary">Request Access</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+    <div class="stats-row">
+      <div><p class="stat-val">$100M</p><p class="stat-label">Target AUM</p></div>
+      <div><p class="stat-val">2028</p><p class="stat-label">Timeline</p></div>
+      <div><p class="stat-val">Quant AI</p><p class="stat-label">Strategy</p></div>
+      <div><p class="stat-val">Crypto</p><p class="stat-label">Markets</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div>
+      <p class="section-label">About</p>
+      <h2>Africa's first AI hedge fund.</h2>
+    </div>
+    <div>
+      <p class="body-text">Africa's financial markets are structurally mispriced. Retail participation in crypto and forex is growing faster than anywhere in the world, yet institutional-grade quantitative infrastructure barely exists.</p>
+      <p class="body-text">OTJ Capital is building that infrastructure — and capturing the alpha that comes with it. Our AI engine scans markets every hour, generates signals from multiple quantitative strategies, and executes orders automatically.</p>
+      <p class="body-text highlight">We are not building a trading tool. We are building a fund.</p>
+    </div>
+  </div>
+</section>
+
+<section id="strategies">
+  <div class="container">
+    <p class="section-label">Strategies</p>
+    <h2>How we generate alpha.</h2>
+    <div class="card-grid">
+      <div class="card">
+        <p class="card-tag">Trend Following</p>
+        <h3 class="card-title">EMA Momentum</h3>
+        <p class="card-desc">Buys when EMA(12) crosses above EMA(26) with RSI between 40–65 and positive MACD histogram. Multiple signals must align before any position opens.</p>
+      </div>
+      <div class="card">
+        <p class="card-tag">Statistical Reversion</p>
+        <h3 class="card-title">Bollinger Mean Reversion</h3>
+        <p class="card-desc">Buys when price touches the lower Bollinger Band, RSI below 35, and z-score below −1.5. Captures statistical extremes with high-confidence entries.</p>
+      </div>
+      <div class="card">
+        <p class="card-tag">Phase 2</p>
+        <h3 class="card-title">Volatility Breakout</h3>
+        <p class="card-desc">ATR-based breakout confirmation with volume. Captures explosive moves at key price levels. Launching Q3 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="risk">
+  <div class="container">
+    <p class="section-label">Risk Management</p>
+    <h2>Risk first. Always.</h2>
+    <div class="risk-grid">
+      <div class="risk-card"><p class="risk-val">1%</p><p class="risk-label">Max AUM at risk per trade</p></div>
+      <div class="risk-card"><p class="risk-val">5%</p><p class="risk-label">Max AUM per position</p></div>
+      <div class="risk-card"><p class="risk-val">2.5×</p><p class="risk-label">Min reward:risk ratio</p></div>
+      <div class="risk-card"><p class="risk-val">1.5× ATR</p><p class="risk-label">Stop loss distance</p></div>
+      <div class="risk-card"><p class="risk-val">48 hrs</p><p class="risk-label">Max hold time</p></div>
+      <div class="risk-card"><p class="risk-val">15%</p><p class="risk-label">Kill switch — drawdown</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="milestones">
+  <div class="container">
+    <p class="section-label">Roadmap</p>
+    <h2>The path to $100M.</h2>
+    <div class="milestone-list">
+      <div class="milestone-row active">
+        <div class="milestone-left"><span class="milestone-stage">Seed</span><span class="milestone-amount">$10,000</span></div>
+        <span class="milestone-date">Q2 2026 — Now</span>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-left"><span class="milestone-stage">First Close</span><span class="milestone-amount">$500,000</span></div>
+        <span class="milestone-date">Q3 2026</span>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-left"><span class="milestone-stage">Preseed</span><span class="milestone-amount">$2,000,000</span></div>
+        <span class="milestone-date">Q4 2026</span>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-left"><span class="milestone-stage">Series A</span><span class="milestone-amount">$20,000,000</span></div>
+        <span class="milestone-date">2027</span>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-left"><span class="milestone-stage">Target AUM</span><span class="milestone-amount">$100,000,000</span></div>
+        <span class="milestone-date">2028</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name">OTJ CAPITAL</p>
+      <p class="footer-sub">Nairobi, Kenya</p>
+      <p class="footer-sub">The AI runs the fund.</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:invest@otjcapital.com">invest@otjcapital.com</a>
+      <a href="https://otj.app">Investor Dashboard →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 OTJ Capital. All rights reserved. Not an offer to invest.</div>
+</footer>
+
+</body>
+</html>
