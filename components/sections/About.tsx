@@ -10,10 +10,13 @@ export default function About() {
         </div>
         <div className="space-y-6 text-[#888] leading-relaxed">
           <p>
-            Africa's financial markets are structurally mispriced. Retail participation in crypto and forex is growing faster than anywhere in the world, yet institutional-grade quantitative infrastructure barely exists.
+            Africa's financial markets are structurally mispriced. Retail participation in crypto and forex is growing faster here than anywhere else in the world, yet institutional-grade quantitative infrastructure barely exists.
           </p>
           <p>
-            OTJ Capital is building that infrastructure — and capturing the alpha that comes with it. Our AI engine scans markets every hour, generates signals from multiple quantitative strategies, sizes positions by volatility-adjusted risk models, and executes orders automatically.
+            OTJ Capital is building that infrastructure — and capturing the alpha that comes with it. Our AI engine scans 34 instruments across crypto, forex, metals, and equities every hour. It generates signals, sizes positions by volatility-adjusted risk models, routes orders to the right exchange, and monitors every open trade automatically.
+          </p>
+          <p>
+            We have a structural edge in African currency pairs — USD/KES, USD/ZAR, USD/NGN — markets where liquidity is thin, information moves slow, and local knowledge is real. That is our home market.
           </p>
           <p className="text-white font-medium">
             We are not building a trading tool. We are building a fund.

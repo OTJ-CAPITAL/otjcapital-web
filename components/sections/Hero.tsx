@@ -8,7 +8,7 @@ export default function Hero() {
         </h1>
         <div className="mt-8 max-w-xl">
           <p className="text-[#888] text-xl leading-relaxed">
-            An AI-native quantitative hedge fund. We deploy systematic trading strategies across crypto markets — autonomously, 24/7.
+            An AI-native quantitative hedge fund. We deploy systematic trading strategies across crypto, forex, metals, and equities — autonomously, 24/7, from Nairobi.
           </p>
         </div>
         <div className="mt-12 flex flex-col sm:flex-row gap-4">
@@ -27,10 +27,10 @@ export default function Hero() {
         </div>
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-[#1a1a1a] pt-12">
           {[
-            { label: 'Target AUM', value: '$100M' },
-            { label: 'Timeline', value: '2028' },
-            { label: 'Strategy', value: 'Quant AI' },
-            { label: 'Markets', value: 'Crypto' },
+            { label: 'Target AUM',    value: '$100M' },
+            { label: 'Timeline',      value: '2028' },
+            { label: 'Asset Classes', value: '4' },
+            { label: 'Strategies',    value: '42' },
           ].map((stat) => (
             <div key={stat.label}>
               <p className="text-3xl font-bold text-white">{stat.value}</p>
