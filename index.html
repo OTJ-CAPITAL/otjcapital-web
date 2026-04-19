@@ -6,223 +6,459 @@
   <title>OTJ Capital — AI-Native Quantitative Hedge Fund</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --black: #000; --white: #fff; --gray: #111; --muted: #666; --border: #1a1a1a; --light: #888; }
     html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-    ::selection { background: #fff; color: #000; }
+    body { background: #fff; color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
+    ::selection { background: #000; color: #fff; }
 
     /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); }
-    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-weight: 900; font-size: 18px; letter-spacing: 4px; }
-    .nav-links { display: flex; gap: 40px; }
-    .nav-links a { font-size: 13px; color: var(--muted); transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    .nav-cta { font-size: 13px; border: 1px solid var(--white); padding: 8px 20px; transition: all 0.2s; }
-    .nav-cta:hover { background: var(--white); color: var(--black); }
-
-    /* SECTIONS */
-    section { border-bottom: 1px solid var(--border); }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid #000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+    }
+    .nav-logo { font-size: 13px; font-weight: 900; letter-spacing: 6px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 48px; }
+    .nav-links a { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #888; transition: color 0.2s; }
+    .nav-links a:hover { color: #000; }
+    .nav-cta {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      border: 1.5px solid #000; padding: 9px 24px; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: #000; color: #fff; }
 
     /* HERO */
-    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 64px; }
-    #hero .container { padding-top: 60px; padding-bottom: 60px; }
-    .eyebrow { font-size: 12px; color: var(--muted); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 32px; }
-    h1 { font-size: clamp(56px, 11vw, 130px); font-weight: 900; line-height: 0.9; letter-spacing: -4px; }
-    .hero-sub { margin-top: 32px; max-width: 480px; font-size: 18px; color: var(--light); line-height: 1.7; }
-    .btn-row { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary { background: var(--white); color: var(--black); font-weight: 700; padding: 16px 32px; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
-    .btn-primary:hover { background: #e0e0e0; }
-    .btn-outline { border: 1px solid #333; color: var(--white); padding: 16px 32px; font-size: 13px; letter-spacing: 1px; transition: border-color 0.2s; }
-    .btn-outline:hover { border-color: var(--white); }
-    .stats-row { margin-top: 80px; padding-top: 48px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-    .stat-val { font-size: 32px; font-weight: 900; }
-    .stat-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    #hero {
+      min-height: 100vh; padding-top: 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #000;
+    }
+    .hero-left {
+      padding: 80px 40px; border-right: 1px solid #000;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .hero-right {
+      padding: 80px 40px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .hero-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #999; }
+    .hero-title { font-size: clamp(72px, 10vw, 140px); font-weight: 900; line-height: 0.88; letter-spacing: -5px; margin-top: 32px; }
+    .hero-tagline { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-top: 40px; }
+    .hero-desc { font-size: 18px; line-height: 1.7; color: #333; max-width: 440px; }
+    .hero-ctas { display: flex; flex-direction: column; gap: 12px; margin-top: 48px; }
+    .btn-black { background: #000; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 18px 36px; display: inline-block; transition: background 0.2s; width: fit-content; }
+    .btn-black:hover { background: #222; }
+    .btn-border { border: 1.5px solid #000; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 18px 36px; display: inline-block; transition: all 0.2s; width: fit-content; }
+    .btn-border:hover { background: #000; color: #fff; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #000; border-top: 1px solid #000; margin-top: auto; }
+    .stat-box { background: #fff; padding: 32px; transition: background 0.2s; }
+    .stat-box:hover { background: #f5f5f5; }
+    .stat-num { font-size: 36px; font-weight: 900; letter-spacing: -2px; }
+    .stat-lbl { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #999; margin-top: 6px; }
+
+    /* TICKER */
+    .ticker-bar {
+      border-bottom: 1px solid #000; overflow: hidden;
+      background: #000; color: #fff; padding: 14px 0;
+      white-space: nowrap;
+    }
+    .ticker-track { display: inline-block; animation: ticker 30s linear infinite; }
+    .ticker-item { display: inline-block; margin: 0 48px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
+    .ticker-dot { color: #555; margin-right: 12px; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ABOUT */
-    #about .container { padding: 120px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .section-label { font-size: 11px; color: var(--muted); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 24px; }
-    h2 { font-size: clamp(36px, 5vw, 56px); font-weight: 900; line-height: 1.1; }
-    .body-text { color: var(--light); line-height: 1.8; margin-bottom: 20px; font-size: 15px; }
-    .body-text.highlight { color: var(--white); font-weight: 600; }
+    #about { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #000; }
+    .about-left { padding: 100px 40px; border-right: 1px solid #000; }
+    .about-right { padding: 100px 40px; }
+    .sec-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #999; margin-bottom: 48px; display: flex; align-items: center; gap: 16px; }
+    .sec-label::before { content: ''; display: block; width: 32px; height: 1px; background: #999; }
+    h2 { font-size: clamp(36px, 4vw, 54px); font-weight: 900; line-height: 1.05; letter-spacing: -2px; }
+    .body-p { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 24px; }
+    .body-p.strong { color: #000; font-weight: 700; font-size: 18px; }
+    .about-numbers { display: flex; flex-direction: column; gap: 1px; background: #000; margin-top: 48px; }
+    .about-num-row { background: #fff; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; cursor: default; }
+    .about-num-row:hover { background: #f5f5f5; }
+    .about-num-val { font-size: 28px; font-weight: 900; letter-spacing: -1px; }
+    .about-num-lbl { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #999; }
 
     /* STRATEGIES */
-    #strategies .container { padding: 120px 24px; }
-    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 64px; }
-    .card { background: var(--black); padding: 40px; }
-    .card-tag { font-size: 11px; color: var(--muted); letter-spacing: 4px; text-transform: uppercase; }
-    .card-title { font-size: 20px; font-weight: 800; margin: 12px 0 16px; }
-    .card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    #strategies { border-bottom: 1px solid #000; }
+    .strategies-header { padding: 80px 40px 0; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #000; padding-bottom: 48px; }
+    .strat-cards { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .strat-card { padding: 56px 40px; border-right: 1px solid #000; transition: background 0.2s; cursor: default; position: relative; overflow: hidden; }
+    .strat-card:last-child { border-right: none; }
+    .strat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #000; transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .strat-card:hover { background: #f8f8f8; }
+    .strat-card:hover::after { transform: scaleX(1); }
+    .strat-num { font-size: 11px; letter-spacing: 4px; color: #ccc; font-weight: 700; margin-bottom: 32px; }
+    .strat-name { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .strat-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #999; margin-bottom: 24px; }
+    .strat-desc { font-size: 14px; color: #555; line-height: 1.8; }
+    .strat-signals { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+    .signal-row { font-size: 12px; color: #333; display: flex; gap: 10px; }
+    .signal-row span:first-child { color: #999; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; min-width: 40px; }
 
-    /* RISK */
-    #risk { background: #040404; }
-    #risk .container { padding: 120px 24px; }
-    .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 64px; }
-    .risk-card { background: #040404; padding: 40px; }
-    .risk-val { font-size: 36px; font-weight: 900; }
-    .risk-label { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    /* RISK TABLE */
+    #risk { border-bottom: 1px solid #000; }
+    .risk-header { padding: 80px 40px 48px; border-bottom: 1px solid #000; display: flex; justify-content: space-between; align-items: flex-end; }
+    .risk-table { width: 100%; }
+    .risk-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid #eee; transition: background 0.15s; }
+    .risk-row:last-child { border-bottom: none; }
+    .risk-row:hover { background: #f8f8f8; }
+    .risk-cell { padding: 28px 40px; font-size: 14px; color: #555; display: flex; align-items: center; }
+    .risk-cell:first-child { font-weight: 600; color: #000; border-right: 1px solid #eee; }
+    .risk-cell.val { font-size: 20px; font-weight: 900; color: #000; border-right: 1px solid #eee; }
+    .risk-header-row { display: grid; grid-template-columns: 1fr 1fr 1fr; background: #000; color: #fff; }
+    .risk-header-cell { padding: 18px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
 
     /* MILESTONES */
-    #milestones .container { padding: 120px 24px; }
-    .milestone-list { margin-top: 64px; display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-    .milestone-row { display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; }
-    .milestone-row.active { background: var(--white); color: var(--black); }
-    .milestone-row:not(.active) { background: var(--black); }
-    .milestone-stage { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.5; }
-    .milestone-amount { font-size: 26px; font-weight: 900; margin-left: 24px; }
-    .milestone-left { display: flex; align-items: center; }
-    .milestone-date { font-size: 13px; }
-    .milestone-row:not(.active) .milestone-date { color: var(--muted); }
-    .milestone-row.active .milestone-date { font-weight: 700; }
+    #milestones { border-bottom: 1px solid #000; }
+    .mile-header { padding: 80px 40px 48px; border-bottom: 1px solid #000; }
+    .mile-item { display: grid; grid-template-columns: 80px 1fr 1fr auto; align-items: center; padding: 32px 40px; border-bottom: 1px solid #eee; transition: all 0.2s; gap: 40px; }
+    .mile-item:last-child { border-bottom: none; }
+    .mile-item:hover { background: #f8f8f8; padding-left: 56px; }
+    .mile-item.current { background: #000; color: #fff; }
+    .mile-item.current:hover { background: #111; padding-left: 56px; }
+    .mile-index { font-size: 11px; letter-spacing: 3px; color: #ccc; }
+    .mile-item.current .mile-index { color: #666; }
+    .mile-stage { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #999; }
+    .mile-item.current .mile-stage { color: #888; }
+    .mile-amount { font-size: 32px; font-weight: 900; letter-spacing: -1px; }
+    .mile-date { font-size: 13px; letter-spacing: 2px; color: #999; text-align: right; }
+    .mile-item.current .mile-date { color: #888; }
+    .mile-badge { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; background: #fff; color: #000; padding: 6px 12px; font-weight: 700; }
+
+    /* TEAM */
+    #team { border-bottom: 1px solid #000; }
+    .team-header { padding: 80px 40px 48px; border-bottom: 1px solid #000; display: flex; justify-content: space-between; align-items: flex-end; }
+    .open-roles { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .role-card { padding: 48px 40px; border-right: 1px solid #000; transition: background 0.2s; }
+    .role-card:last-child { border-right: none; }
+    .role-card:hover { background: #f5f5f5; }
+    .role-type { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #999; margin-bottom: 16px; }
+    .role-name { font-size: 22px; font-weight: 900; margin-bottom: 16px; }
+    .role-desc { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 24px; }
+    .role-link { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1.5px solid #000; padding-bottom: 2px; }
+
+    /* CTA BAND */
+    #cta-band { background: #000; color: #fff; padding: 100px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px; border-bottom: 1px solid #000; }
+    .cta-text { font-size: clamp(36px, 5vw, 64px); font-weight: 900; letter-spacing: -3px; line-height: 1; }
+    .btn-white { background: #fff; color: #000; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 18px 40px; transition: background 0.2s; display: inline-block; }
+    .btn-white:hover { background: #e0e0e0; }
 
     /* FOOTER */
-    footer { padding: 60px 24px; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 32px; }
-    .footer-name { font-weight: 900; font-size: 17px; letter-spacing: 4px; }
-    .footer-sub { font-size: 13px; color: #444; margin-top: 4px; }
-    .footer-links { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #444; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-bottom { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid #111; font-size: 11px; color: #333; }
+    footer { padding: 60px 40px; border-top: none; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
+    .footer-brand { font-size: 13px; font-weight: 900; letter-spacing: 6px; }
+    .footer-sub { font-size: 13px; color: #999; margin-top: 8px; line-height: 1.6; }
+    .footer-col-title { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+    .footer-col a { display: block; font-size: 13px; color: #555; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: #000; }
+    .footer-bottom { margin-top: 60px; padding-top: 24px; border-top: 1px solid #eee; display: flex; justify-content: space-between; font-size: 11px; color: #bbb; }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      #about .container { grid-template-columns: 1fr; gap: 40px; }
-      .card-grid, .risk-grid { grid-template-columns: 1fr; }
-      .milestone-row { padding: 20px 24px; }
-      .milestone-amount { font-size: 20px; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; border-bottom: 1px solid #000; }
+      #about { grid-template-columns: 1fr; }
+      .about-left { border-right: none; border-bottom: 1px solid #000; }
+      .strat-cards { grid-template-columns: 1fr; }
+      .strat-card { border-right: none; border-bottom: 1px solid #000; }
+      .risk-row, .risk-header-row { grid-template-columns: 1fr 1fr; }
+      .risk-cell:last-child { display: none; }
+      .risk-header-cell:last-child { display: none; }
+      .mile-item { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .mile-index { display: none; }
+      .open-roles { grid-template-columns: 1fr; }
+      .role-card { border-right: none; border-bottom: 1px solid #000; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      #cta-band { padding: 60px 20px; }
+      .strat-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <span class="logo">OTJ</span>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#strategies">Strategies</a>
-      <a href="#milestones">Milestones</a>
-    </div>
-    <a href="mailto:invest@otjcapital.com" class="nav-cta">Invest</a>
+  <span class="nav-logo">OTJ Capital</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#strategies">Strategies</a>
+    <a href="#risk">Risk</a>
+    <a href="#milestones">Milestones</a>
+    <a href="#team">Careers</a>
   </div>
+  <a href="mailto:invest@otjcapital.com" class="nav-cta">Invest</a>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <div class="container">
-    <p class="eyebrow">Nairobi, Kenya · Est. 2026</p>
-    <h1>OTJ<br>CAPITAL</h1>
-    <p class="hero-sub">An AI-native quantitative hedge fund. We deploy systematic trading strategies across crypto markets — autonomously, 24/7.</p>
-    <div class="btn-row">
-      <a href="mailto:invest@otjcapital.com" class="btn-primary">Request Access</a>
-      <a href="#about" class="btn-outline">Learn More</a>
+  <div class="hero-left">
+    <div>
+      <p class="hero-label">Nairobi, Kenya · Est. 2026</p>
+      <h1 class="hero-title">OTJ<br>CAP<br>ITAL</h1>
+      <p class="hero-tagline">The AI runs the fund.</p>
     </div>
-    <div class="stats-row">
-      <div><p class="stat-val">$100M</p><p class="stat-label">Target AUM</p></div>
-      <div><p class="stat-val">2028</p><p class="stat-label">Timeline</p></div>
-      <div><p class="stat-val">Quant AI</p><p class="stat-label">Strategy</p></div>
-      <div><p class="stat-val">Crypto</p><p class="stat-label">Markets</p></div>
+    <div class="hero-stats">
+      <div class="stat-box"><p class="stat-num">$100M</p><p class="stat-lbl">Target AUM</p></div>
+      <div class="stat-box"><p class="stat-num">2028</p><p class="stat-lbl">Timeline</p></div>
+      <div class="stat-box"><p class="stat-num">24/7</p><p class="stat-lbl">Autonomous</p></div>
+      <div class="stat-box"><p class="stat-num">2.5×</p><p class="stat-lbl">Min Risk:Reward</p></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div>
+      <p class="hero-desc">An AI-native quantitative hedge fund. We deploy systematic, data-driven trading strategies across crypto markets — autonomously, around the clock, with zero human intervention required.</p>
+      <div class="hero-ctas">
+        <a href="mailto:invest@otjcapital.com" class="btn-black">Request Access →</a>
+        <a href="#about" class="btn-border">Learn More</a>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#999;margin-bottom:20px;">Active on</p>
+      <p style="font-size:28px;font-weight:900;">Binance</p>
+      <p style="font-size:13px;color:#999;margin-top:6px;">BTC/USDT · ETH/USDT · and growing</p>
     </div>
   </div>
 </section>
 
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot">●</span>EMA Momentum Strategy</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>Bollinger Band Mean Reversion</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>ATR-Based Position Sizing</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>1% Max AUM Per Trade</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>Kill Switch at 15% Drawdown</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>Hourly Signal Generation</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>OTJ Capital · Nairobi · 2026</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>EMA Momentum Strategy</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>Bollinger Band Mean Reversion</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>ATR-Based Position Sizing</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>1% Max AUM Per Trade</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>Kill Switch at 15% Drawdown</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>Hourly Signal Generation</span>
+    <span class="ticker-item"><span class="ticker-dot">●</span>OTJ Capital · Nairobi · 2026</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
 <section id="about">
-  <div class="container">
-    <div>
-      <p class="section-label">About</p>
-      <h2>Africa's first AI hedge fund.</h2>
+  <div class="about-left">
+    <p class="sec-label">About</p>
+    <h2>Africa's first AI hedge fund.</h2>
+    <div class="about-numbers">
+      <div class="about-num-row">
+        <span class="about-num-lbl">Seed Stage</span>
+        <span class="about-num-val">$10K</span>
+      </div>
+      <div class="about-num-row">
+        <span class="about-num-lbl">First Close Target</span>
+        <span class="about-num-val">$500K</span>
+      </div>
+      <div class="about-num-row">
+        <span class="about-num-lbl">Strategies Live</span>
+        <span class="about-num-val">2</span>
+      </div>
+      <div class="about-num-row">
+        <span class="about-num-lbl">Engine Cycles / Day</span>
+        <span class="about-num-val">24</span>
+      </div>
     </div>
-    <div>
-      <p class="body-text">Africa's financial markets are structurally mispriced. Retail participation in crypto and forex is growing faster than anywhere in the world, yet institutional-grade quantitative infrastructure barely exists.</p>
-      <p class="body-text">OTJ Capital is building that infrastructure — and capturing the alpha that comes with it. Our AI engine scans markets every hour, generates signals from multiple quantitative strategies, and executes orders automatically.</p>
-      <p class="body-text highlight">We are not building a trading tool. We are building a fund.</p>
-    </div>
+  </div>
+  <div class="about-right">
+    <p class="sec-label">The opportunity</p>
+    <p class="body-p">Africa's financial markets are structurally mispriced. Retail participation in crypto and forex is growing faster than anywhere in the world, yet institutional-grade quantitative infrastructure barely exists.</p>
+    <p class="body-p">OTJ Capital is building that infrastructure — and capturing the alpha that comes with it. Our AI engine scans markets every hour, generates signals from multiple quantitative strategies, sizes positions by volatility-adjusted risk models, and executes orders automatically.</p>
+    <p class="body-p">No manual trades. No emotional decisions. No human bottlenecks.</p>
+    <p class="body-p strong">We are not building a trading tool. We are building a fund.</p>
   </div>
 </section>
 
+<!-- STRATEGIES -->
 <section id="strategies">
-  <div class="container">
-    <p class="section-label">Strategies</p>
-    <h2>How we generate alpha.</h2>
-    <div class="card-grid">
-      <div class="card">
-        <p class="card-tag">Trend Following</p>
-        <h3 class="card-title">EMA Momentum</h3>
-        <p class="card-desc">Buys when EMA(12) crosses above EMA(26) with RSI between 40–65 and positive MACD histogram. Multiple signals must align before any position opens.</p>
-      </div>
-      <div class="card">
-        <p class="card-tag">Statistical Reversion</p>
-        <h3 class="card-title">Bollinger Mean Reversion</h3>
-        <p class="card-desc">Buys when price touches the lower Bollinger Band, RSI below 35, and z-score below −1.5. Captures statistical extremes with high-confidence entries.</p>
-      </div>
-      <div class="card">
-        <p class="card-tag">Phase 2</p>
-        <h3 class="card-title">Volatility Breakout</h3>
-        <p class="card-desc">ATR-based breakout confirmation with volume. Captures explosive moves at key price levels. Launching Q3 2026.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="risk">
-  <div class="container">
-    <p class="section-label">Risk Management</p>
-    <h2>Risk first. Always.</h2>
-    <div class="risk-grid">
-      <div class="risk-card"><p class="risk-val">1%</p><p class="risk-label">Max AUM at risk per trade</p></div>
-      <div class="risk-card"><p class="risk-val">5%</p><p class="risk-label">Max AUM per position</p></div>
-      <div class="risk-card"><p class="risk-val">2.5×</p><p class="risk-label">Min reward:risk ratio</p></div>
-      <div class="risk-card"><p class="risk-val">1.5× ATR</p><p class="risk-label">Stop loss distance</p></div>
-      <div class="risk-card"><p class="risk-val">48 hrs</p><p class="risk-label">Max hold time</p></div>
-      <div class="risk-card"><p class="risk-val">15%</p><p class="risk-label">Kill switch — drawdown</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="milestones">
-  <div class="container">
-    <p class="section-label">Roadmap</p>
-    <h2>The path to $100M.</h2>
-    <div class="milestone-list">
-      <div class="milestone-row active">
-        <div class="milestone-left"><span class="milestone-stage">Seed</span><span class="milestone-amount">$10,000</span></div>
-        <span class="milestone-date">Q2 2026 — Now</span>
-      </div>
-      <div class="milestone-row">
-        <div class="milestone-left"><span class="milestone-stage">First Close</span><span class="milestone-amount">$500,000</span></div>
-        <span class="milestone-date">Q3 2026</span>
-      </div>
-      <div class="milestone-row">
-        <div class="milestone-left"><span class="milestone-stage">Preseed</span><span class="milestone-amount">$2,000,000</span></div>
-        <span class="milestone-date">Q4 2026</span>
-      </div>
-      <div class="milestone-row">
-        <div class="milestone-left"><span class="milestone-stage">Series A</span><span class="milestone-amount">$20,000,000</span></div>
-        <span class="milestone-date">2027</span>
-      </div>
-      <div class="milestone-row">
-        <div class="milestone-left"><span class="milestone-stage">Target AUM</span><span class="milestone-amount">$100,000,000</span></div>
-        <span class="milestone-date">2028</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-inner">
+  <div class="strategies-header">
     <div>
-      <p class="footer-name">OTJ CAPITAL</p>
-      <p class="footer-sub">Nairobi, Kenya</p>
-      <p class="footer-sub">The AI runs the fund.</p>
+      <p class="sec-label">Strategies</p>
+      <h2>How we generate alpha.</h2>
     </div>
-    <div class="footer-links">
-      <a href="mailto:invest@otjcapital.com">invest@otjcapital.com</a>
-      <a href="https://otj.app">Investor Dashboard →</a>
+    <p style="font-size:13px;color:#999;max-width:320px;line-height:1.7;">All strategies run simultaneously on every trading pair every hour. Multi-strategy agreement boosts signal confidence.</p>
+  </div>
+  <div class="strat-cards">
+    <div class="strat-card">
+      <p class="strat-num">01</p>
+      <p class="strat-name">EMA Momentum</p>
+      <p class="strat-tag">Trend Following</p>
+      <p class="strat-desc">Buys when multiple momentum signals align simultaneously. No single indicator is sufficient — all must confirm.</p>
+      <div class="strat-signals">
+        <div class="signal-row"><span>Entry</span><span>EMA(12) crosses above EMA(26)</span></div>
+        <div class="signal-row"><span>Filter</span><span>RSI between 40 and 65</span></div>
+        <div class="signal-row"><span>Confirm</span><span>MACD histogram &gt; 0</span></div>
+        <div class="signal-row"><span>Exit</span><span>EMA death cross or RSI &gt; 70</span></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <p class="strat-num">02</p>
+      <p class="strat-name">Bollinger Mean Reversion</p>
+      <p class="strat-tag">Statistical Reversion</p>
+      <p class="strat-desc">Captures statistically extreme price dislocations. Requires price to be more than 1.5 standard deviations below mean.</p>
+      <div class="strat-signals">
+        <div class="signal-row"><span>Entry</span><span>Price ≤ lower Bollinger Band</span></div>
+        <div class="signal-row"><span>Filter</span><span>RSI below 35 — oversold</span></div>
+        <div class="signal-row"><span>Confirm</span><span>Z-score ≤ −1.5</span></div>
+        <div class="signal-row"><span>Exit</span><span>Price ≥ upper band, RSI &gt; 65</span></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <p class="strat-num">03</p>
+      <p class="strat-name">Volatility Breakout</p>
+      <p class="strat-tag">Phase 2 · Q3 2026</p>
+      <p class="strat-desc">ATR-based breakout detection with volume confirmation. Captures explosive directional moves at key levels.</p>
+      <div class="strat-signals">
+        <div class="signal-row"><span>Entry</span><span>ATR breakout above threshold</span></div>
+        <div class="signal-row"><span>Filter</span><span>Volume confirmation required</span></div>
+        <div class="signal-row"><span>Confirm</span><span>Price holds breakout level</span></div>
+        <div class="signal-row"><span>Status</span><span>Launching Q3 2026</span></div>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 OTJ Capital. All rights reserved. Not an offer to invest.</div>
+</section>
+
+<!-- RISK TABLE -->
+<section id="risk">
+  <div class="risk-header">
+    <div>
+      <p class="sec-label">Risk Engine</p>
+      <h2>Non-negotiable rules.</h2>
+    </div>
+    <p style="font-size:13px;color:#999;max-width:300px;line-height:1.7;">The risk engine runs before and after every signal. No position opens without risk approval.</p>
+  </div>
+  <div class="risk-header-row">
+    <div class="risk-header-cell">Rule</div>
+    <div class="risk-header-cell">Limit</div>
+    <div class="risk-header-cell">Purpose</div>
+  </div>
+  <div class="risk-table">
+    <div class="risk-row"><div class="risk-cell">Max AUM at risk per trade</div><div class="risk-cell val">1%</div><div class="risk-cell">Limits catastrophic single-trade loss</div></div>
+    <div class="risk-row"><div class="risk-cell">Max AUM per position</div><div class="risk-cell val">5%</div><div class="risk-cell">Enforces diversification</div></div>
+    <div class="risk-row"><div class="risk-cell">Stop loss</div><div class="risk-cell val">1.5× ATR</div><div class="risk-cell">Volatility-adjusted, not fixed</div></div>
+    <div class="risk-row"><div class="risk-cell">Take profit</div><div class="risk-cell val">3.75× ATR</div><div class="risk-cell">2.5× reward per unit of risk</div></div>
+    <div class="risk-row"><div class="risk-cell">Min reward:risk ratio</div><div class="risk-cell val">2.5:1</div><div class="risk-cell">Profitable at &gt;29% win rate</div></div>
+    <div class="risk-row"><div class="risk-cell">Max hold time</div><div class="risk-cell val">48 hrs</div><div class="risk-cell">Forces position discipline</div></div>
+    <div class="risk-row"><div class="risk-cell">Kill switch — drawdown</div><div class="risk-cell val">15%</div><div class="risk-cell">Halts all trading immediately</div></div>
+    <div class="risk-row"><div class="risk-cell">Kill switch — daily loss</div><div class="risk-cell val">5%</div><div class="risk-cell">Prevents compounding daily losses</div></div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section id="milestones">
+  <div class="mile-header">
+    <p class="sec-label">Roadmap</p>
+    <h2>The path to $100M.</h2>
+  </div>
+  <div class="mile-item current">
+    <span class="mile-index">01</span>
+    <span class="mile-stage">Seed Deployment</span>
+    <span class="mile-amount">$10,000</span>
+    <span class="mile-date">Q2 2026 &nbsp;<span class="mile-badge">Now</span></span>
+  </div>
+  <div class="mile-item">
+    <span class="mile-index">02</span>
+    <span class="mile-stage">First Close</span>
+    <span class="mile-amount">$500,000</span>
+    <span class="mile-date">Q3 2026</span>
+  </div>
+  <div class="mile-item">
+    <span class="mile-index">03</span>
+    <span class="mile-stage">Preseed Round</span>
+    <span class="mile-amount">$2,000,000</span>
+    <span class="mile-date">Q4 2026</span>
+  </div>
+  <div class="mile-item">
+    <span class="mile-index">04</span>
+    <span class="mile-stage">Series A</span>
+    <span class="mile-amount">$20,000,000</span>
+    <span class="mile-date">2027</span>
+  </div>
+  <div class="mile-item">
+    <span class="mile-index">05</span>
+    <span class="mile-stage">Target AUM</span>
+    <span class="mile-amount">$100,000,000</span>
+    <span class="mile-date">2028</span>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-header">
+    <div>
+      <p class="sec-label">Careers</p>
+      <h2>We are hiring.</h2>
+    </div>
+    <p style="font-size:13px;color:#999;max-width:300px;line-height:1.7;">OTJ Capital is a solo-founder company. If you are exceptional at what you do and believe in AI-driven finance in Africa — reach out.</p>
+  </div>
+  <div class="open-roles">
+    <div class="role-card">
+      <p class="role-type">Open Role</p>
+      <p class="role-name">Quantitative Researcher</p>
+      <p class="role-desc">Build and backtest new alpha strategies. Deep knowledge of statistical modelling, time series analysis, and systematic trading required.</p>
+      <a href="mailto:careers@otjcapital.com" class="role-link">Apply →</a>
+    </div>
+    <div class="role-card">
+      <p class="role-type">Open Role</p>
+      <p class="role-name">Backend Engineer</p>
+      <p class="role-desc">Scale the trading infrastructure. Python expert with experience in real-time systems, async pipelines, and financial data at speed.</p>
+      <a href="mailto:careers@otjcapital.com" class="role-link">Apply →</a>
+    </div>
+    <div class="role-card">
+      <p class="role-type">Open Role</p>
+      <p class="role-name">Full-Stack Engineer</p>
+      <p class="role-desc">Build the investor portal and reporting suite. Next.js, TypeScript, Supabase. Obsessed with UI quality and data visualisation.</p>
+      <a href="mailto:careers@otjcapital.com" class="role-link">Apply →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div id="cta-band">
+  <p class="cta-text">Ready to invest<br>in Africa's edge?</p>
+  <a href="mailto:invest@otjcapital.com" class="btn-white">Request Access →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">OTJ CAPITAL</p>
+      <p class="footer-sub">Nairobi, Kenya<br>The AI runs the fund.<br>Targeting $100M AUM by 2028.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Company</p>
+      <a href="#about">About</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#milestones">Roadmap</a>
+      <a href="#team">Careers</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Products</p>
+      <a href="https://otj.app">OTJ App</a>
+      <a href="https://otjfellowship.com">Fellowship</a>
+      <a href="https://otjholdings.com">Holdings</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Contact</p>
+      <a href="mailto:invest@otjcapital.com">Invest</a>
+      <a href="mailto:careers@otjcapital.com">Careers</a>
+      <a href="mailto:hello@otjcapital.com">General</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 OTJ Capital. All rights reserved. Not an offer to invest.</span>
+    <span>Nairobi, Kenya</span>
+  </div>
 </footer>
 
 </body>
