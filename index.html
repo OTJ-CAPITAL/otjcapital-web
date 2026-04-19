@@ -43,7 +43,7 @@
       display: flex; flex-direction: column; justify-content: space-between;
     }
     .hero-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #999; }
-    .hero-title { font-size: clamp(72px, 10vw, 140px); font-weight: 900; line-height: 0.88; letter-spacing: -5px; margin-top: 32px; }
+    .hero-title { font-size: clamp(48px, 7vw, 96px); font-weight: 900; line-height: 1; letter-spacing: -4px; margin-top: 32px; white-space: nowrap; }
     .hero-tagline { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-top: 40px; }
     .hero-desc { font-size: 18px; line-height: 1.7; color: #333; max-width: 440px; }
     .hero-ctas { display: flex; flex-direction: column; gap: 12px; margin-top: 48px; }
@@ -113,22 +113,17 @@
     .risk-header-row { display: grid; grid-template-columns: 1fr 1fr 1fr; background: #000; color: #fff; }
     .risk-header-cell { padding: 18px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
 
-    /* MILESTONES */
-    #milestones { border-bottom: 1px solid #000; }
-    .mile-header { padding: 80px 40px 48px; border-bottom: 1px solid #000; }
-    .mile-item { display: grid; grid-template-columns: 80px 1fr 1fr auto; align-items: center; padding: 32px 40px; border-bottom: 1px solid #eee; transition: all 0.2s; gap: 40px; }
-    .mile-item:last-child { border-bottom: none; }
-    .mile-item:hover { background: #f8f8f8; padding-left: 56px; }
-    .mile-item.current { background: #000; color: #fff; }
-    .mile-item.current:hover { background: #111; padding-left: 56px; }
-    .mile-index { font-size: 11px; letter-spacing: 3px; color: #ccc; }
-    .mile-item.current .mile-index { color: #666; }
-    .mile-stage { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #999; }
-    .mile-item.current .mile-stage { color: #888; }
-    .mile-amount { font-size: 32px; font-weight: 900; letter-spacing: -1px; }
-    .mile-date { font-size: 13px; letter-spacing: 2px; color: #999; text-align: right; }
-    .mile-item.current .mile-date { color: #888; }
-    .mile-badge { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; background: #fff; color: #000; padding: 6px 12px; font-weight: 700; }
+    /* TRUST */
+    #trust { border-bottom: 1px solid #000; }
+    .trust-header { padding: 80px 40px 48px; border-bottom: 1px solid #000; display: flex; justify-content: space-between; align-items: flex-end; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .trust-card { padding: 56px 40px; border-right: 1px solid #000; border-bottom: 1px solid #000; transition: background 0.2s; }
+    .trust-card:nth-child(3), .trust-card:nth-child(6) { border-right: none; }
+    .trust-card:nth-child(4), .trust-card:nth-child(5), .trust-card:nth-child(6) { border-bottom: none; }
+    .trust-card:hover { background: #f8f8f8; }
+    .trust-icon { font-size: 28px; margin-bottom: 24px; }
+    .trust-title { font-size: 18px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.3px; }
+    .trust-desc { font-size: 14px; color: #555; line-height: 1.8; }
 
     /* TEAM */
     #team { border-bottom: 1px solid #000; }
@@ -170,8 +165,8 @@
       .risk-row, .risk-header-row { grid-template-columns: 1fr 1fr; }
       .risk-cell:last-child { display: none; }
       .risk-header-cell:last-child { display: none; }
-      .mile-item { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .mile-index { display: none; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-card { border-right: none; }
       .open-roles { grid-template-columns: 1fr; }
       .role-card { border-right: none; border-bottom: 1px solid #000; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -188,7 +183,7 @@
     <a href="#about">About</a>
     <a href="#strategies">Strategies</a>
     <a href="#risk">Risk</a>
-    <a href="#milestones">Milestones</a>
+    <a href="#trust">Why Us</a>
     <a href="#team">Careers</a>
   </div>
   <a href="mailto:invest@otjcapital.com" class="nav-cta">Invest</a>
@@ -199,7 +194,7 @@
   <div class="hero-left">
     <div>
       <p class="hero-label">Nairobi, Kenya · Est. 2026</p>
-      <h1 class="hero-title">OTJ<br>CAP<br>ITAL</h1>
+      <h1 class="hero-title">OTJ CAPITAL</h1>
       <p class="hero-tagline">The AI runs the fund.</p>
     </div>
     <div class="hero-stats">
@@ -353,41 +348,46 @@
   </div>
 </section>
 
-<!-- MILESTONES -->
-<section id="milestones">
-  <div class="mile-header">
-    <p class="sec-label">Roadmap</p>
-    <h2>The path to $100M.</h2>
+<!-- TRUST -->
+<section id="trust">
+  <div class="trust-header">
+    <div>
+      <p class="sec-label">Why Trust Us</p>
+      <h2>Built on discipline,<br>not promises.</h2>
+    </div>
+    <p style="font-size:13px;color:#999;max-width:320px;line-height:1.7;">Every principle below is enforced in code. Not policy documents. Not guidelines. Hardcoded rules the engine cannot override.</p>
   </div>
-  <div class="mile-item current">
-    <span class="mile-index">01</span>
-    <span class="mile-stage">Seed Deployment</span>
-    <span class="mile-amount">$10,000</span>
-    <span class="mile-date">Q2 2026 &nbsp;<span class="mile-badge">Now</span></span>
-  </div>
-  <div class="mile-item">
-    <span class="mile-index">02</span>
-    <span class="mile-stage">First Close</span>
-    <span class="mile-amount">$500,000</span>
-    <span class="mile-date">Q3 2026</span>
-  </div>
-  <div class="mile-item">
-    <span class="mile-index">03</span>
-    <span class="mile-stage">Preseed Round</span>
-    <span class="mile-amount">$2,000,000</span>
-    <span class="mile-date">Q4 2026</span>
-  </div>
-  <div class="mile-item">
-    <span class="mile-index">04</span>
-    <span class="mile-stage">Series A</span>
-    <span class="mile-amount">$20,000,000</span>
-    <span class="mile-date">2027</span>
-  </div>
-  <div class="mile-item">
-    <span class="mile-index">05</span>
-    <span class="mile-stage">Target AUM</span>
-    <span class="mile-amount">$100,000,000</span>
-    <span class="mile-date">2028</span>
+  <div class="trust-grid">
+    <div class="trust-card">
+      <div class="trust-icon">🔒</div>
+      <p class="trust-title">Capital is Protected First</p>
+      <p class="trust-desc">The risk engine runs before every single trade. No position opens without approval. If the kill switch triggers — at 15% drawdown or 5% daily loss — all trading halts immediately and automatically.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">📊</div>
+      <p class="trust-title">Full Investor Transparency</p>
+      <p class="trust-desc">Every trade, every signal, every position is logged and visible to investors in real time via the OTJ App dashboard. No monthly PDFs. No selective reporting. You see exactly what the engine sees.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">🤖</div>
+      <p class="trust-title">Zero Human Emotion</p>
+      <p class="trust-desc">No trader overrides. No gut decisions. No panic selling. The AI executes the strategy exactly as designed — every hour, every day, in bull markets and bear markets alike.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">⚖️</div>
+      <p class="trust-title">Strict Position Limits</p>
+      <p class="trust-desc">Maximum 1% of AUM at risk per trade. Maximum 5% per position. Every position sized by ATR — volatility determines size, not conviction. The math protects you, not a manager's confidence.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">📐</div>
+      <p class="trust-title">Minimum 2.5× Reward Ratio</p>
+      <p class="trust-desc">No trade is taken unless the expected gain is at least 2.5× the risk. At a 29% win rate the fund breaks even. This asymmetry is why systematic funds survive long-term when discretionary ones don't.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">🌍</div>
+      <p class="trust-title">Built for African Markets</p>
+      <p class="trust-desc">Founded in Nairobi, designed for African capital. We understand the volatility, the liquidity constraints, and the structural inefficiencies of this market better than any foreign fund ever could.</p>
+    </div>
   </div>
 </section>
 
