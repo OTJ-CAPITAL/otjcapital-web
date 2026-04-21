@@ -6,12 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "git:add": "git add -A",
+    "git:commit": "git commit -m \"feat: complete otjcapital.com build from design spec\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\"",
+    "git:push": "git push origin main",
+    "deploy": "git add -A && git commit -m \"feat: complete otjcapital.com build from design spec\" && git push origin main"
   },
   "dependencies": {
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.8.0",
     "next": "^14.2.0",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.3.0",
+    "react-intersection-observer": "^10.0.3"
   },
   "devDependencies": {
     "@types/node": "^20",

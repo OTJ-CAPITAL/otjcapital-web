@@ -1,20 +1,24 @@
-import Navbar from '@/components/ui/Navbar'
-import Hero from '@/components/sections/Hero'
-import About from '@/components/sections/About'
-import Strategies from '@/components/sections/Strategies'
-import Metrics from '@/components/sections/Metrics'
-import Milestones from '@/components/sections/Milestones'
-import Footer from '@/components/ui/Footer'
+import Navigation from '@/components/shared/Navigation'
+import Footer from '@/components/shared/Footer'
+import Hero from '@/components/capital/Hero'
+import Thesis from '@/components/capital/Thesis'
+import HowItWorks from '@/components/capital/HowItWorks'
+import StrategyPreview from '@/components/capital/StrategyPreview'
+import Markets from '@/components/capital/Markets'
+import Roadmap from '@/components/capital/Roadmap'
+import InvestCTA from '@/components/capital/InvestCTA'
 
 export default function Home() {
   return (
-    <main>
-      <Navbar />
+    <main className="bg-[#080808]">
+      <Navigation />
       <Hero />
-      <About />
-      <Strategies />
-      <Metrics />
-      <Milestones />
+      <Thesis />
+      <HowItWorks />
+      <StrategyPreview />
+      <Markets />
+      <Roadmap />
+      <InvestCTA />
       <Footer />
     </main>
   )
