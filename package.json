@@ -7,10 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "git:add": "git add -A",
-    "git:commit": "git commit -m \"feat: complete otjcapital.com build from design spec\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\"",
-    "git:push": "git push origin main",
-    "deploy": "git add -A && git commit -m \"feat: complete otjcapital.com build from design spec\" && git push origin main"
+    "git:push": "git add -A && git commit -m \"chore: clean up build artifacts and scripts\" && git push origin main"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
