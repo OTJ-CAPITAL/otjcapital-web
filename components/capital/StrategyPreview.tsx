@@ -1,104 +1,53 @@
 'use client'
-
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { fadeUp, staggerContainer } from '@/lib/animations'
 
 const phases = [
-  {
-    phase: 'Phase 1',
-    status: 'LIVE NOW',
-    statusColor: 'text-[#C9A84C] border-[#C9A84C]/30 bg-[#C9A84C]/10',
-    strategies: [
-      { name: 'Momentum', detail: 'BTC/USDT · ETH/USDT · 1h' },
-      { name: 'Mean Reversion', detail: 'BTC/USDT · ETH/USDT · 1h' },
-      { name: 'Funding Rate', detail: 'BTC Perpetuals' },
-    ],
-  },
-  {
-    phase: 'Phase 2',
-    status: 'Q3 2026',
-    statusColor: 'text-[#888888] border-[#2A2A2A] bg-[#1E1E1E]',
-    strategies: [
-      { name: 'African Equities', detail: 'NSE · NGX · JSE' },
-      { name: 'African FX', detail: 'USD/KES · USD/NGN · USD/ZAR' },
-    ],
-  },
-  {
-    phase: 'Phase 3',
-    status: '2027',
-    statusColor: 'text-[#555555] border-[#1E1E1E] bg-[#111111]',
-    strategies: [
-      { name: 'Commodities', detail: 'Gold · Oil · Coffee · Cocoa' },
-      { name: 'Stat Arbitrage', detail: 'Cross-pair correlation' },
-    ],
-  },
+  { phase: 'Phase 1', status: 'LIVE NOW', color: '#C9A84C', rows: [
+    ['Momentum', 'BTC/USDT · ETH/USDT · 1h'],
+    ['Mean Reversion', 'BTC/USDT · ETH/USDT · 1h'],
+    ['Funding Rate', 'BTC Perpetuals'],
+  ]},
+  { phase: 'Phase 2', status: 'Q3 2026', color: '#555555', rows: [
+    ['African Equities', 'NSE · NGX · JSE'],
+    ['African FX', 'USD/KES · USD/NGN · USD/ZAR'],
+  ]},
+  { phase: 'Phase 3', status: '2027', color: '#555555', rows: [
+    ['Commodities', 'Gold · Oil · Coffee · Cocoa'],
+    ['Stat Arbitrage', 'Cross-pair correlation'],
+  ]},
 ]
 
 export default function StrategyPreview() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="strategy" className="bg-[#080808] py-28 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Label */}
-        <p className="font-body text-[#C9A84C] text-[10px] tracking-[3px] uppercase mb-6">
-          Strategy
-        </p>
-
-        {/* Headline */}
-        <h2
-          className="font-display font-bold text-white leading-[1.1] mb-16"
-          style={{ fontSize: 'clamp(32px, 4vw, 48px)' }}
-        >
-          How the machine thinks.
-        </h2>
-
-        {/* Phase grid */}
-        <motion.div
-          ref={ref}
-          variants={staggerContainer}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="flex flex-col gap-6 mb-12"
-        >
-          {phases.map((ph) => (
-            <motion.div
-              key={ph.phase}
-              variants={fadeUp}
-              className="bg-[#141414] border border-[#1E1E1E] rounded-[4px] p-8 hover:border-[#C9A84C] transition-colors duration-300"
-            >
-              {/* Phase header */}
-              <div className="flex flex-wrap items-center gap-4 mb-6">
-                <span className="font-display font-bold text-white text-sm">{ph.phase}</span>
-                <span className={`font-mono text-xs px-3 py-1 rounded-[2px] border ${ph.statusColor} tracking-widest`}>
-                  {ph.status}
-                </span>
-              </div>
-
-              {/* Strategies table */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {ph.strategies.map((s) => (
-                  <div key={s.name} className="flex flex-col gap-1 py-3 border-t border-[#1E1E1E]">
-                    <span className="font-display font-semibold text-white text-sm">{s.name}</span>
-                    <span className="font-mono text-[#555555] text-xs">{s.detail}</span>
+    <section ref={ref} style={{ background: '#080808', padding: '120px 32px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <motion.div variants={staggerContainer} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+          <motion.div variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontSize: '10px', color: '#C9A84C', letterSpacing: '3px', marginBottom: '16px' }}>STRATEGY</motion.div>
+          <motion.h2 variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF', marginBottom: '64px' }}>How the machine thinks.</motion.h2>
+          <motion.div variants={staggerContainer} style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            {phases.map((p, i) => (
+              <motion.div key={i} variants={fadeUp} style={{ background: '#141414', border: '1px solid #1E1E1E', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ padding: '20px 32px', borderBottom: '1px solid #1E1E1E', display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <span style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '15px', color: '#FFFFFF' }}>{p.phase}</span>
+                  <span style={{ fontFamily: 'JetBrains Mono', fontSize: '11px', color: p.color, border: `1px solid ${p.color}`, padding: '3px 10px', borderRadius: '2px' }}>{p.status}</span>
+                </div>
+                {p.rows.map(([name, markets], j) => (
+                  <div key={j} style={{ padding: '16px 32px', display: 'flex', justifyContent: 'space-between', borderBottom: j < p.rows.length - 1 ? '1px solid #1E1E1E' : 'none' }}>
+                    <span style={{ fontFamily: 'Space Grotesk', fontSize: '14px', color: '#FFFFFF' }}>{name}</span>
+                    <span style={{ fontFamily: 'JetBrains Mono', fontSize: '13px', color: '#555555' }}>{markets}</span>
                   </div>
                 ))}
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div variants={fadeUp} style={{ marginTop: '40px' }}>
+            <a href="#" style={{ color: '#C9A84C', fontFamily: 'Space Grotesk', fontSize: '14px', textDecoration: 'none', letterSpacing: '0.5px' }}>View Full Strategy →</a>
+          </motion.div>
         </motion.div>
-
-        {/* Link */}
-        <motion.a
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          href="#"
-          className="inline-flex items-center font-display font-semibold text-[#C9A84C] text-sm hover:text-[#E8C96A] transition-colors duration-200 group"
-        >
-          View Full Strategy →
-        </motion.a>
       </div>
     </section>
   )

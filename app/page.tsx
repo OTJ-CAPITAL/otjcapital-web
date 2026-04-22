@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Navigation from '@/components/shared/Navigation'
 import Footer from '@/components/shared/Footer'
 import Hero from '@/components/capital/Hero'
@@ -10,7 +12,7 @@ import InvestCTA from '@/components/capital/InvestCTA'
 
 export default function Home() {
   return (
-    <main className="bg-[#080808]">
+    <main>
       <Navigation />
       <Hero />
       <Thesis />

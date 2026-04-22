@@ -1,76 +1,34 @@
 'use client'
-
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { fadeUp, staggerContainer } from '@/lib/animations'
 
 const cards = [
-  {
-    number: '01',
-    title: 'QUANTITATIVE',
-    body: 'Every signal derived from data. No gut feelings. No opinions. The model decides.',
-  },
-  {
-    number: '02',
-    title: 'AI-NATIVE',
-    body: 'Not retrofitted with AI. Born AI-first. The intelligence is structural, not supplemental.',
-  },
-  {
-    number: '03',
-    title: 'TIRELESS',
-    body: 'Monitors every market. Executes every signal. 24 hours a day. No exceptions.',
-  },
+  { num: '01', title: 'Quantitative', body: 'Every signal derived from data. No gut feelings. No opinions. The model decides.' },
+  { num: '02', title: 'AI-Native', body: 'Not retrofitted with AI. Born AI-first. The intelligence is structural, not supplemental.' },
+  { num: '03', title: 'Tireless', body: 'Monitors every market. Executes every signal. 24 hours a day. No exceptions.' },
 ]
 
 export default function HowItWorks() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section className="bg-[#0D0D0D] border-t border-[#1E1E1E] py-28 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Label */}
-        <p className="font-body text-[#C9A84C] text-[10px] tracking-[3px] uppercase mb-6">
-          The Machine
-        </p>
-
-        {/* Headline */}
-        <h2
-          className="font-display font-bold text-white leading-[1.1] mb-16"
-          style={{ fontSize: 'clamp(32px, 4vw, 48px)' }}
-        >
-          Every decision. Data-driven.
-        </h2>
-
-        {/* Cards */}
-        <motion.div
-          ref={ref}
-          variants={staggerContainer}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {cards.map((card) => (
-            <motion.div
-              key={card.number}
-              variants={fadeUp}
-              className="group bg-[#141414] border border-[#1E1E1E] rounded-[4px] p-8 hover:border-[#C9A84C] transition-colors duration-300"
-            >
-              {/* Number */}
-              <span className="font-mono text-[#C9A84C] text-sm font-bold block mb-6 tracking-wider">
-                {card.number}
-              </span>
-
-              {/* Title */}
-              <h3 className="font-display font-bold text-white text-xl tracking-wide mb-4 uppercase">
-                {card.title}
-              </h3>
-
-              {/* Body */}
-              <p className="font-body text-[#888888] text-sm leading-relaxed">
-                {card.body}
-              </p>
-            </motion.div>
-          ))}
+    <section ref={ref} id="strategy" style={{ background: '#0D0D0D', borderTop: '1px solid #1E1E1E', padding: '120px 32px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <motion.div variants={staggerContainer} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+          <motion.div variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontSize: '10px', color: '#C9A84C', letterSpacing: '3px', marginBottom: '16px' }}>THE MACHINE</motion.div>
+          <motion.h2 variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF', marginBottom: '64px' }}>Every decision. Data-driven.</motion.h2>
+          <motion.div variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+            {cards.map((c, i) => (
+              <motion.div key={i} variants={fadeUp} style={{ background: '#141414', border: '1px solid #1E1E1E', padding: '40px 32px', borderRadius: '4px', transition: 'border-color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = '#C9A84C')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = '#1E1E1E')}>
+                <div style={{ fontFamily: 'JetBrains Mono', fontSize: '13px', color: '#C9A84C', marginBottom: '16px' }}>{c.num}</div>
+                <h3 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '20px', color: '#FFFFFF', marginBottom: '16px' }}>{c.title}</h3>
+                <p style={{ fontFamily: 'Inter', fontSize: '15px', color: '#888888', lineHeight: 1.7 }}>{c.body}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>

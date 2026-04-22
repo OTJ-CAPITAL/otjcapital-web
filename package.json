@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "git:push": "git add -A && git commit -m \"chore: clean up build artifacts and scripts\" && git push origin main"
+    "lint": "next lint"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

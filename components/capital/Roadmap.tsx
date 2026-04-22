@@ -1,135 +1,38 @@
 'use client'
-
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { fadeUp, staggerContainer } from '@/lib/animations'
 
-const milestones = [
-  {
-    date: 'Q2 2026',
-    aum: '$500K AUM',
-    description:
-      'Live crypto trading. Track record begins. Every trade verifiable on OTJ App.',
-    isActive: true,
-    size: 'sm',
-  },
-  {
-    date: 'Q3 2026',
-    aum: '$5M AUM',
-    description: '90-day auditable returns. Institutional conversations begin.',
-    isActive: false,
-    size: 'sm',
-  },
-  {
-    date: 'Q4 2026',
-    aum: '$10M AUM',
-    description: 'OTJ Capital announced to the world. African equity deployment begins.',
-    isActive: false,
-    size: 'sm',
-  },
-  {
-    date: '2028',
-    aum: '$100M AUM',
-    description: 'The flag is planted.',
-    isActive: false,
-    size: 'lg',
-  },
+const nodes = [
+  { date: 'Q2 2026', aum: '$500K AUM', desc: 'Live crypto trading. Track record begins. Every trade verifiable on OTJ App.' },
+  { date: 'Q3 2026', aum: '$5M AUM', desc: '90-day auditable returns. Institutional conversations begin.' },
+  { date: 'Q4 2026', aum: '$10M AUM', desc: 'OTJ Capital announced to the world. African equity deployment begins.' },
+  { date: '2028', aum: '$100M AUM', desc: 'The flag is planted.', large: true },
 ]
 
 export default function Roadmap() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section className="bg-[#080808] py-28 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Label */}
-        <p className="font-body text-[#C9A84C] text-[10px] tracking-[3px] uppercase mb-6">
-          The Roadmap
-        </p>
-
-        {/* Headline */}
-        <h2
-          className="font-display font-bold text-white leading-[1.1] mb-20"
-          style={{ fontSize: 'clamp(32px, 4vw, 48px)' }}
-        >
-          From $1,000 to $100,000,000.
-        </h2>
-
-        {/* Timeline — horizontal on desktop, vertical on mobile */}
-        <div className="relative">
-          {/* Connecting line — horizontal on desktop */}
-          <div
-            className="hidden md:block absolute top-[18px] left-0 right-0 h-px bg-[#1E1E1E]"
-            style={{ zIndex: 0 }}
-          />
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="hidden md:block absolute top-[18px] left-0 right-0 h-px bg-[#C9A84C] origin-left"
-            style={{ zIndex: 1 }}
-          />
-
-          {/* Milestones grid */}
-          <motion.div
-            ref={ref}
-            variants={staggerContainer}
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative"
-            style={{ zIndex: 2 }}
-          >
-            {milestones.map((m, i) => (
-              <motion.div
-                key={m.date}
-                variants={fadeUp}
-                className="flex flex-col"
-              >
-                {/* Dot + date row */}
-                <div className="flex md:flex-col items-start md:items-start gap-4 md:gap-0 mb-4 md:mb-6">
-                  {/* Dot */}
-                  <div className={`relative flex-shrink-0 ${m.size === 'lg' ? 'mt-0.5' : 'mt-0.5'}`}>
-                    {m.size === 'lg' ? (
-                      <div className="w-9 h-9 rounded-full bg-[#C9A84C] flex items-center justify-center">
-                        <div className="w-3 h-3 rounded-full bg-[#080808]" />
-                      </div>
-                    ) : (
-                      <div
-                        className={`w-5 h-5 rounded-full border-2 ${
-                          m.isActive ? 'bg-[#C9A84C] border-[#C9A84C]' : 'bg-[#080808] border-[#2A2A2A]'
-                        }`}
-                      />
-                    )}
-                  </div>
-
-                  {/* Date — only visible on mobile beside the dot */}
-                  <span className="md:hidden font-mono text-[#C9A84C] text-sm font-bold">
-                    {m.date}
-                  </span>
-                </div>
-
-                {/* Date — visible on desktop below the dot */}
-                <span className="hidden md:block font-mono text-[#C9A84C] text-xs font-bold tracking-wider mb-3">
-                  {m.date}
-                </span>
-
-                {/* AUM */}
-                <span
-                  className={`font-display font-bold mb-3 ${
-                    m.size === 'lg' ? 'text-2xl text-[#C9A84C]' : 'text-lg text-white'
-                  }`}
-                >
-                  {m.aum}
-                </span>
-
-                {/* Description */}
-                <p className="font-body text-[#888888] text-sm leading-relaxed">
-                  {m.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+    <section ref={ref} style={{ background: '#080808', padding: '120px 32px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <motion.div variants={staggerContainer} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+          <motion.div variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontSize: '10px', color: '#C9A84C', letterSpacing: '3px', marginBottom: '16px' }}>THE ROADMAP</motion.div>
+          <motion.h2 variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF', marginBottom: '80px' }}>From $1,000 to $100,000,000.</motion.h2>
+          <div style={{ position: 'relative' }}>
+            <div style={{ position: 'absolute', top: '16px', left: '16px', right: '16px', height: '2px', background: '#1E1E1E', zIndex: 0 }} />
+            <motion.div variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px', position: 'relative', zIndex: 1 }}>
+              {nodes.map((n, i) => (
+                <motion.div key={i} variants={fadeUp}>
+                  <div style={{ width: n.large ? '20px' : '14px', height: n.large ? '20px' : '14px', borderRadius: '50%', background: '#C9A84C', marginBottom: '24px', border: '2px solid #C9A84C', boxShadow: '0 0 16px rgba(201,168,76,0.3)' }} />
+                  <div style={{ fontFamily: 'JetBrains Mono', fontSize: '12px', color: '#C9A84C', marginBottom: '8px' }}>{n.date}</div>
+                  <div style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '18px', color: '#FFFFFF', marginBottom: '12px' }}>{n.aum}</div>
+                  <div style={{ fontFamily: 'Inter', fontSize: '14px', color: '#555555', lineHeight: 1.7 }}>{n.desc}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
