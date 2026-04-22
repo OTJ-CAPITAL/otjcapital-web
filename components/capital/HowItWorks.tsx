@@ -3,29 +3,27 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { fadeUp, staggerContainer } from '@/lib/animations'
 
-const cards = [
-  { num: '01', title: 'Quantitative', body: 'Every signal derived from data. No gut feelings. No opinions. The model decides.' },
-  { num: '02', title: 'AI-Native', body: 'Not retrofitted with AI. Born AI-first. The intelligence is structural, not supplemental.' },
-  { num: '03', title: 'Tireless', body: 'Monitors every market. Executes every signal. 24 hours a day. No exceptions.' },
+const steps = [
+  { num: '01', title: 'Data in.', body: 'The system ingests price data, order book depth, funding rates, and macroeconomic signals across 40+ instruments in real time.' },
+  { num: '02', title: 'Signal generated.', body: 'Quantitative models — momentum, mean reversion, statistical arbitrage — score every opportunity against historical performance.' },
+  { num: '03', title: 'Trade executed.', body: 'When a signal clears the risk threshold, the system executes automatically. No human approval required. No hesitation.' },
+  { num: '04', title: 'Everything logged.', body: 'Every entry, exit, size, P&L, and AI rationale is recorded. Investors can see it all in OTJ App in real time.' },
 ]
 
 export default function HowItWorks() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
-
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1, fallbackInView: true })
   return (
-    <section ref={ref} id="strategy" style={{ background: '#0D0D0D', borderTop: '1px solid #1E1E1E', padding: '120px 32px' }}>
+    <section id="strategy" ref={ref} style={{ padding: '120px 32px', borderBottom: '1px solid #E5E5E5' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <motion.div variants={staggerContainer} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-          <motion.div variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontSize: '10px', color: '#C9A84C', letterSpacing: '3px', marginBottom: '16px' }}>THE MACHINE</motion.div>
-          <motion.h2 variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF', marginBottom: '64px' }}>Every decision. Data-driven.</motion.h2>
-          <motion.div variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-            {cards.map((c, i) => (
-              <motion.div key={i} variants={fadeUp} style={{ background: '#141414', border: '1px solid #1E1E1E', padding: '40px 32px', borderRadius: '4px', transition: 'border-color 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = '#C9A84C')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = '#1E1E1E')}>
-                <div style={{ fontFamily: 'JetBrains Mono', fontSize: '13px', color: '#C9A84C', marginBottom: '16px' }}>{c.num}</div>
-                <h3 style={{ fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '20px', color: '#FFFFFF', marginBottom: '16px' }}>{c.title}</h3>
-                <p style={{ fontFamily: 'Inter', fontSize: '15px', color: '#888888', lineHeight: 1.7 }}>{c.body}</p>
+          <motion.div variants={fadeUp} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '2px', color: '#888', marginBottom: '16px' }}>HOW IT WORKS</motion.div>
+          <motion.h2 variants={fadeUp} style={{ fontFamily: 'var(--font-sg)', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', color: '#000', letterSpacing: '-1px', marginBottom: '64px' }}>Four steps. Zero humans.</motion.h2>
+          <motion.div variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0' }}>
+            {steps.map((s, i) => (
+              <motion.div key={i} variants={fadeUp} style={{ padding: '40px 32px', borderLeft: i === 0 ? '1px solid #E5E5E5' : 'none', borderRight: '1px solid #E5E5E5', borderTop: '1px solid #E5E5E5', borderBottom: '1px solid #E5E5E5' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#BBB', marginBottom: '20px' }}>{s.num}</div>
+                <h3 style={{ fontFamily: 'var(--font-sg)', fontWeight: 700, fontSize: '22px', color: '#000', marginBottom: '16px' }}>{s.title}</h3>
+                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '15px', color: '#555', lineHeight: 1.7 }}>{s.body}</p>
               </motion.div>
             ))}
           </motion.div>

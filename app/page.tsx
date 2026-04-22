@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/shared/Navigation'
 import Footer from '@/components/shared/Footer'
 import Hero from '@/components/capital/Hero'

@@ -1,83 +1,46 @@
 'use client'
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import CountUp from 'react-countup'
 import { useInView } from 'react-intersection-observer'
-import { fadeUp, staggerContainer, goldLineDraw } from '@/lib/animations'
+import { fadeUp, staggerContainer } from '@/lib/animations'
+import CountUp from 'react-countup'
 
-const metrics = [
-  { value: '24/7', label: 'Market Coverage' },
-  { value: '0', label: 'Emotional Decisions' },
-  { value: '$100M', label: '2028 AUM Target' },
-  { value: 'Africa', label: 'Primary Market' },
+const stats = [
+  { label: 'Strategies live', value: 3, suffix: '' },
+  { label: 'Markets covered', value: 4, suffix: '' },
+  { label: 'Hours of operation', value: 24, suffix: '/day' },
+  { label: 'Human emotion', value: 0, suffix: '' },
 ]
 
 export default function Hero() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
-
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1, fallbackInView: true })
   return (
-    <section style={{
-      minHeight: '100vh', background: '#080808', display: 'flex', flexDirection: 'column',
-      justifyContent: 'center', padding: '120px 32px 80px', position: 'relative', overflow: 'hidden'
-    }}>
-      {/* Grid background */}
-      <div style={{
-        position: 'absolute', inset: 0, opacity: 0.4,
-        backgroundImage: 'linear-gradient(#111111 1px, transparent 1px), linear-gradient(90deg, #111111 1px, transparent 1px)',
-        backgroundSize: '64px 64px', pointerEvents: 'none'
-      }} />
-
-      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible">
-          {/* Tag */}
-          <motion.div variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontSize: '11px', color: '#C9A84C', letterSpacing: '4px', marginBottom: '32px' }}>
-            NAIROBI, KENYA — AI-NATIVE QUANTITATIVE HEDGE FUND
+    <section ref={ref} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '100px 32px 80px', borderBottom: '1px solid #E5E5E5' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+        <motion.div variants={staggerContainer} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+          <motion.div variants={fadeUp} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '2px', color: '#888', marginBottom: '32px' }}>
+            OTJ CAPITAL — QUANTITATIVE FUND
           </motion.div>
-
-          {/* Headline */}
-          <motion.h1 variants={fadeUp} style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 'clamp(48px, 7vw, 88px)', lineHeight: 1.05, marginBottom: '32px', color: '#FFFFFF' }}>
-            The AI<br />
-            <span style={{ position: 'relative', display: 'inline-block' }}>
-              Runs The Fund.
-              <motion.div variants={goldLineDraw} style={{ position: 'absolute', bottom: '-4px', left: 0, right: 0, height: '2px', background: '#C9A84C', transformOrigin: 'left' }} />
-            </span>
+          <motion.h1 variants={fadeUp} style={{ fontFamily: 'var(--font-sg)', fontWeight: 800, fontSize: 'clamp(40px, 6vw, 80px)', color: '#000', lineHeight: 1.05, letterSpacing: '-2px', marginBottom: '32px' }}>
+            We built an AI that<br />trades markets while<br />you sleep.
           </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p variants={fadeUp} style={{ fontFamily: 'Inter', fontSize: '20px', color: '#888888', maxWidth: '520px', lineHeight: 1.7, marginBottom: '48px' }}>
-            Every investment decision made by the machine.<br />
-            No emotion. No bias. No sleep. Pure signal<br />
-            from the markets Wall Street cannot touch.
+          <motion.p variants={fadeUp} style={{ fontFamily: 'var(--font-inter)', fontSize: '20px', color: '#444', maxWidth: '560px', lineHeight: 1.7, marginBottom: '48px' }}>
+            OTJ Capital runs fully automated quantitative strategies across crypto and emerging markets. No human emotion. No downtime. Every trade is logged and verifiable.
           </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={fadeUp} style={{ display: 'flex', gap: '16px', marginBottom: '64px', flexWrap: 'wrap' }}>
-            <a href="#invest" style={{ background: '#C9A84C', color: '#080808', padding: '14px 32px', fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '15px', textDecoration: 'none', borderRadius: '2px' }}>
-              Invest With Us →
-            </a>
-            <a href="#strategy" style={{ border: '1px solid #2A2A2A', color: '#FFFFFF', padding: '14px 32px', fontFamily: 'Space Grotesk', fontWeight: 600, fontSize: '15px', textDecoration: 'none', borderRadius: '2px' }}>
-              View Strategy
-            </a>
+          <motion.div variants={fadeUp} style={{ display: 'flex', gap: '16px', marginBottom: '80px', flexWrap: 'wrap' }}>
+            <a href="#invest" style={{ background: '#000', color: '#fff', padding: '14px 32px', fontFamily: 'var(--font-sg)', fontWeight: 600, fontSize: '15px' }}>Talk to us about investing</a>
+            <a href="#strategy" style={{ border: '1px solid #000', color: '#000', padding: '14px 32px', fontFamily: 'var(--font-sg)', fontWeight: 600, fontSize: '15px' }}>How it works</a>
           </motion.div>
-
-          {/* Gold divider */}
-          <motion.div variants={fadeUp} style={{ height: '1px', background: '#C9A84C', width: '100%', maxWidth: '600px', marginBottom: '40px' }} />
-
-          {/* Metrics */}
-          <motion.div variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', maxWidth: '600px' }}>
-            {metrics.map((m, i) => (
-              <motion.div key={i} variants={fadeUp}>
-                <div style={{ fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '24px', color: '#FFFFFF', marginBottom: '4px' }}>{m.value}</div>
-                <div style={{ fontFamily: 'Inter', fontSize: '12px', color: '#555555', letterSpacing: '0.5px' }}>{m.label}</div>
+          <motion.div variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0', borderTop: '1px solid #E5E5E5', paddingTop: '40px' }}>
+            {stats.map((s, i) => (
+              <motion.div key={i} variants={fadeUp} style={{ paddingRight: '32px', borderRight: i < 3 ? '1px solid #E5E5E5' : 'none', marginRight: i < 3 ? '32px' : '0' }}>
+                <div style={{ fontFamily: 'var(--font-sg)', fontWeight: 800, fontSize: '36px', color: '#000', marginBottom: '4px' }}>
+                  {inView ? <><CountUp end={s.value} duration={1.5} />{s.suffix}</> : `0${s.suffix}`}
+                </div>
+                <div style={{ fontFamily: 'var(--font-inter)', fontSize: '13px', color: '#888' }}>{s.label}</div>
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <div style={{ position: 'absolute', bottom: '-40px', left: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '1px', height: '40px', background: '#C9A84C', animation: 'pulse-down 2s ease-in-out infinite' }} />
-        </div>
       </div>
     </section>
   )
