@@ -5,6 +5,7 @@ import Thesis from '@/components/capital/Thesis'
 import HowItWorks from '@/components/capital/HowItWorks'
 import StrategyPreview from '@/components/capital/StrategyPreview'
 import Markets from '@/components/capital/Markets'
+import FAQ from '@/components/capital/FAQ'
 import Roadmap from '@/components/capital/Roadmap'
 import InvestCTA from '@/components/capital/InvestCTA'
 
@@ -17,6 +18,7 @@ export default function Home() {
       <HowItWorks />
       <StrategyPreview />
       <Markets />
+      <FAQ />
       <Roadmap />
       <InvestCTA />
       <Footer />
