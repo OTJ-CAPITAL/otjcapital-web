@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic'
 
 import Navigation from '@/components/shared/Navigation'
 import Footer from '@/components/shared/Footer'
